@@ -11,6 +11,12 @@ line-number = "relative"
 rulers = [120]
 # Force the theme to show colors
 true-color = true
+# Use mouse
+mouse = true
+# Number of lines of padding around the edge of the screen when scrolling
+scrolloff = 10
+
+gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
 
 [editor.cursor-shape]
 insert = "bar"
@@ -20,6 +26,14 @@ select = "underline"
 [editor.indent-guides]
 character = "╎"
 render = true
+
+[editor.file-picker]
+hidden = false
+parents = false
+git-ignore = false
+
+[editor.whitespace]
+render = "all"
 
 [editor.lsp]
 # Disable automatically popups of signature parameter help
@@ -31,13 +45,6 @@ display-messages = true
 left = ["mode", "spinner", "version-control", "file-name"]
 
 [keys.normal]
-"A-," = "goto_previous_buffer"
-"A-." = "goto_next_buffer"
-"A-w" = ":buffer-close"
-"A-/" = "repeat_last_motion"
-"A-x" = "extend_to_line_bounds"
-"X"   = ["extend_line_up", "extend_to_line_bounds"]
-
-[keys.select]
-A-x = "extend_to_line_bounds"
-X = ["extend_line_up", "extend_to_line_bounds"]
+# Use system clipboard
+y = "yank_main_selection_to_clipboard"
+p = "paste_clipboard_before"
