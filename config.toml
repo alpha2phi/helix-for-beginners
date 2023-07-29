@@ -7,16 +7,14 @@ bufferline = "multiple"
 cursorline = true
 # Use relative line numbers
 line-number = "relative"
-# Show a ruler at column 120
-rulers = [120]
+# Show a ruler at column 80 and 120
+rulers = [80, 120]
 # Force the theme to show colors
 true-color = true
 # Use mouse
 mouse = true
 # Number of lines of padding around the edge of the screen when scrolling
 scrolloff = 10
-
-gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
 
 [editor.cursor-shape]
 insert = "bar"
@@ -37,12 +35,25 @@ render = "all"
 
 [editor.lsp]
 # Disable automatically popups of signature parameter help
-auto-signature-help = false
+# auto-signature-help = false
 # Show LSP messages in the status line
 display-messages = true
+display-inlay-hints = true
 
 [editor.statusline]
-left = ["mode", "spinner", "version-control", "file-name"]
+left = ["mode", "spinner", "version-control"]
+center = ["file-name"]
+right = [ "diagnostics",
+  "selections",
+  "position",
+  "file-encoding",
+  "file-line-ending",
+  "file-type",
+]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
 
 [keys.normal]
 # Use system clipboard
