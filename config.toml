@@ -1,0 +1,61 @@
+theme = "everforest_dark"
+
+[editor]
+# Show currently open buffers, only when more than one exists.
+bufferline = "multiple"
+# Highlight all lines with a cursor
+cursorline = true
+# Use relative line numbers
+line-number = "relative"
+# Show a ruler at column 80 and 120
+rulers = [80, 120]
+# Force the theme to show colors
+true-color = true
+# Use mouse
+mouse = true
+# Number of lines of padding around the edge of the screen when scrolling
+scrolloff = 10
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+character = "╎"
+render = true
+
+[editor.file-picker]
+hidden = false
+parents = false
+git-ignore = false
+
+[editor.whitespace]
+render = "all"
+
+[editor.lsp]
+# Disable automatically popups of signature parameter help
+# auto-signature-help = false
+# Show LSP messages in the status line
+display-messages = true
+display-inlay-hints = true
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control"]
+center = ["file-name"]
+right = [ "diagnostics",
+  "selections",
+  "position",
+  "file-encoding",
+  "file-line-ending",
+  "file-type",
+]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[keys.normal]
+# Use system clipboard
+y = "yank_main_selection_to_clipboard"
+p = "paste_clipboard_before"
