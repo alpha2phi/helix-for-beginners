@@ -1,33 +1,54 @@
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+config = { settings = { python = { analysis = { autoImportCompletions = true, typeCheckingMode = "off", autoSearchPaths = true, useLibraryCodeForTypes = true, diagnosticMode = "openFilesOnly" } } } }
+
+[language-server.ruff-lsp]
+command = "ruff-lsp"
+
 [[language]]
 name = "python"
-roots = ["pyproject.toml"]
-formatter = { command = "black", args = ["--quiet", "-"] }
-language-server = { command = "pyright-langserver", args = ["--stdio"] }
-config = {}
+scope = "source.python"
+injection-regex = "python"
 auto-format = true
+formatter = { command = "black", args = ["-", "-q"] }
+file-types = [
+  "py",
+  "pyi",
+  "py3",
+  "pyw",
+  "ptl",
+  ".pythonstartup",
+  ".pythonrc",
+  "SConstruct",
+]
+shebangs = ["python"]
+roots = [
+  "setup.py",
+  "setup.cfg",
+  "pyproject.toml",
+  "pyrightconfig.json",
+  "Poetry.lock",
+]
+comment-token = "#"
+language-servers = ["pyright", "ruff-lsp"]
+indent = { tab-width = 4, unit = "    " }
 
-[[language]]
-name = "rust"
-auto-format = true
+# # -- Not functional yet
+[language.debugger]
+name = "debugpy"
+transport = "stdio"
+command = "python"
+args = ["-m", "debugpy.adapter"]
 
-[[language]]
-name = "typescript"
-auto-format = true
-# pass format options according to https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration omitting the "[language].format." prefix.
-config = { format = { "semicolons" = "insert", "insertSpaceBeforeFunctionParenthesis" = true } }
+[[language.debugger.templates]]
+name = "source"
+request = "launch"
+completion = [{ name = "entrypoint", completion = "filename", default = "." }]
+args = { mode = "debug", program = "{0}" }
 
 [[language]]
 name = "javascript"
-scope = "source.js"
-injection-regex = "(js|javascript)"
-file-types = ["js", "mjs", "cjs"]
-shebangs = ["node"]
-roots = []
-comment-token = "//"
-language-server = { command = "typescript-language-server", args = [
-  "--stdio",
-], language-id = "javascript" }
-indent = { tab-width = 2, unit = "  " }
 
 [language.debugger]
 name = "node-debug2"
@@ -43,3 +64,45 @@ name = "source"
 request = "launch"
 completion = [{ name = "main", completion = "filename", default = "index.js" }]
 args = { program = "{0}" }
+
+
+[[language]]
+name = "typescript"
+
+[language.debugger]
+name = "node-debug2"
+command = "node"
+transport = "stdio"
+quirks = { absolute-paths = true }
+args = [
+  "/home/alpha2phi/workspace/temp/vscode-node-debug2/out/src/nodeDebug.js",
+]
+
+[[language.debugger.templates]]
+name = "source"
+request = "launch"
+completion = [{ name = "main", completion = "filename", default = "index.js" }]
+args = { program = "{0}" }
+
+[[language]]
+name = "rust"
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+[language.debugger]
+command = "codelldb"
+name = "codelldb"
+port-arg = "--port {}"
+transport = "tcp"
+
+[[language.debugger.templates]]
+name = "binary"
+request = "launch"
+[[language.debugger.templates.completion]]
+completion = "filename"
+name = "binary"
+
+[language.debugger.templates.args]
+program = "{0}"
+runInTerminal = true
